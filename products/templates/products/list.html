@@ -1,15 +1,17 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <title>Product list page</title>
-</head>
-<body>
-    Product List Page
-    
-</body>
-</html>
+{% extends 'main.html' %} {% load static %} {% block content %}
+<div class="container-fluid d-flex justify-content-center">
+    <div class="row mt-5">
+        <div class="card mx-auto col-md-3 col-10 mt-5">
+            <img class="mx-auto img-thumbnail" src="https://i.imgur.com/pjITBzX.jpg" width="auto" height="auto" />
+            <div class="card-body text-center mx-auto">
+                <div class="cvp">
+                    <h5 class="card-title font-weight-bold">Yail wrist watch</h5>
+                    <p class="card-text">$299</p>
+                    <a href="#" class="btn cart-details px-auto">View</a><br />
+                    <a href="#" class="btn cart px-auto">Add To Cart</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
