@@ -12,6 +12,21 @@ class Order(models.Model):
     def __str__(self):
         return str(self.id)
 
+    @property
+    def get_cart_total(self):
+        orderitems = self.orderitem_set.all()
+        total = 0
+        for orderitem in orderitems:
+            total += orderitem.get_total
+        return total
+    @property
+    def get_items(self):
+        orderitems = self.orderitem_set.all()
+        total = 0
+        for orderitem in orderitems:
+            total += orderitem.quantity
+        return total   
+
 class OrderItem(models.Model):
     product = models.ForeignKey(Product,on_delete=models.SET_NULL,null=True)
     order = models.ForeignKey(Order,on_delete=models.SET_NULL,null=True)
@@ -20,6 +35,12 @@ class OrderItem(models.Model):
     updated_at = models.DateTimeField(auto_now = True)
 
 
+    @property
+    def get_total(self):
+        total = self.product.price* self.quantity
+        return total
+
+    
 class Shipping(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL,null=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL,null=True)
