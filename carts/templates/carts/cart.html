@@ -15,7 +15,7 @@
                         <h5>Items: <strong>{{order.get_items}}</strong></h5>
                     </th>
                     <th>
-                        <h5>Total: <strong>${{order.get_cart_total}}</strong></h5>
+                        <h5>Total: <strong>${{order.get_cart_total|floatformat:2}}</strong></h5>
                     </th>
                     <th>
                         <a class="float-right btn btn-success" href="{% url 'checkout' %}">Checkout</a>

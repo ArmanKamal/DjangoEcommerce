@@ -1,10 +1,10 @@
 {% extends 'main.html' %} 
 {% load static %} 
 {% block content %}
-<div class="container-fluid">
+<div class="container">
     <div class="row mt-5">
     {% for product in products %}
-         <div class="col-md-4">
+         <div class="col-md-4 my-4  ">
             <!-- bbb_deals -->
             <div class="bbb_deals">
                 <div class="ribbon ribbon-top-right"><span><small class="cross">x </small>4</span></div>
@@ -28,6 +28,11 @@
                                 </div>
                                 <div class="available_bar"><span style="width:17%"></span></div>
                             </div>
+                            <div class="row  mt-4">
+                                <button class="btn btn-info mx-3 ">View</button>
+                                <button data-product={{product.id}} data-action="add" class="btn btn-success update-cart">Add to Cart</button>
+                            </div>
+                           
                         </div>
                     </div>
                 </div>
