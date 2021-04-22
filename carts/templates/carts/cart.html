@@ -65,13 +65,13 @@
                             <td class="align-middle">
                                 <p class="quantity">{{item.quantity}}</p><strong>
                                    <div class="quantity">
-							<img class="chg-quantity" src="{% static  'images/arrow-up.png' %}">
+							<img data-product={{item.product.id}} data-action="add" class="chg-quantity update-cart" src="{% static  'images/arrow-up.png' %}">
 					
-							<img class="chg-quantity" src="{% static  'images/arrow-down.png' %}">
+							<img data-product={{item.product.id}} data-action="remove" class="chg-quantity update-cart" src="{% static  'images/arrow-down.png' %}">
 						</div>
                                 </strong>
                             </td>
-                            <td class="align-middle"><strong>${{item.get_total}}</strong></td>
+                            <td class="align-middle"><strong>${{item.get_total|floatformat:2}}</strong></td>
                             <td class="align-middle"><a href="#" class="text-dark"><i class="fa fa-trash"></i></a>
                             </td>
                         </tr>

@@ -52,10 +52,10 @@ def updateItem(request):
     else:
         orderItem.quantity = orderItem.quantity - 1
     
-    request.session['cart_items'] = order.get_items
-
     orderItem.save()
+    request.session['cart_items'] = order.get_items
 
     if orderItem.quantity <=0:
         orderItem.delete()
+    
     return JsonResponse('Item was addedd',safe=False)
