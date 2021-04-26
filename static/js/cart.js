@@ -7,7 +7,7 @@ let updateBtn = document.getElementsByClassName('update-cart')
          
     
             if(user == 'AnonymousUser'){
-                console.log('Not logged in')
+                addCookieItem(productId, action)
             }
     
             else{
@@ -17,7 +17,24 @@ let updateBtn = document.getElementsByClassName('update-cart')
      }
 
   
+function addCookieItem(productId, action){
+   if(action == "add"){
+        if(cart[productId] == undefined){
+            cart[productId] = {'quantity':1}
+        }
+        else{
+            cart[productId]['quantity'] += 1
+        }
+   }
+   if (action == 'remove'){
+       cart[productId]['quantity'] -= 1
 
+       if(cart[productId]['quantity'] <=0){
+           delete cart[productId]
+       }
+   }
+   document.cookie = 'cart='+ JSON.stringify(cart) + ";domain=;path=/"
+}
 
 function updateUserOrder(productId,action){
     var url = '/update_item/'
