@@ -96,7 +96,7 @@
 
 <script>
     let shipping = '{{order.shipping}}'
-    let total = '{{order.get_cart_total|floatformat:2}}'
+    let total = '{{order.get_cart_total}}'
     if(shipping == 'False'){
         document.getElementById('shipping-info').innerHTML = ''
     }
@@ -118,6 +118,9 @@
 
 
     var form = document.getElementById('form')
+
+
+
     form.addEventListener('submit', function(e){
         e.preventDefault()
         document.getElementById('form-button').classList.add('hidden')
@@ -153,6 +156,24 @@
            userFormData.name = form.name.value
            userFormData.email = form.email.value
        }
+
+       fetch('/process_order/',{
+           method:'post',
+           headers:{
+               'Content-Type':'application/json',
+               'X-CSRFToken':csrftoken
+           },
+           body:JSON.stringify({
+               'userForm': userFormData,
+               'shipping': shippingInfo
+           }) 
+       })
+          .then((response) => response.json())
+           .then((data) => {
+               console.log(data)
+               alert('Transaction completed');
+               window.location.href = "{% url 'list' %}"
+           })
     }
 </script>
 
