@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 class Customer(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
     name = models.CharField(max_length=120)
-    email = models.CharField(max_length=120)
+    email = models.EmailField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -13,7 +13,7 @@ class Customer(models.Model):
     
 class Product(models.Model):
     name = models.CharField(max_length=120)
-    price = models.FloatField()
+    price = models.DecimalField(max_digits=7, decimal_places=2)
     image = models.ImageField(null=True,blank=True)
     description = models.TextField(default="No description found")
     digital = models.BooleanField(default=False,null=True,blank=True)
