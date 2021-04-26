@@ -1,20 +1,23 @@
 let updateBtn = document.getElementsByClassName('update-cart')
 
-for(let i=0; i< updateBtn.length;i++){
-    updateBtn[i].addEventListener('click', function(){
-        var productId = this.dataset.product
-        var action = this.dataset.action
-        console.log(productId, action,updateBtn[i])
+    for (var i = 0 ; i < updateBtn.length; i++) {
+        updateBtn[i].addEventListener('click', function(){
+            var productId = this.dataset.product
+            var action = this.dataset.action
+         
+    
+            if(user == 'AnonymousUser'){
+                console.log('Not logged in')
+            }
+    
+            else{
+                updateUserOrder(productId, action)
+            }
+        })
+     }
 
-        if(user == 'AnonymousUser'){
-            console.log('Not logged in')
-        }
+  
 
-        else{
-            updateUserOrder(productId, action)
-        }
-    })
-}
 
 function updateUserOrder(productId,action){
     var url = '/update_item/'
