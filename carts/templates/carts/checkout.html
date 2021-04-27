@@ -45,14 +45,14 @@
             <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Order summary </div>
             {% for item in items %}
             <div class="cart-row">
+                {% if item.product.image %}
                 <div style="flex:2">
-                    {% if item.product.image %}
                     <img src="{{item.product.image.url}}" alt="" width="70" class="img-fluid rounded shadow-sm">
-                    {% endif  %}
                 </div>
+                {% endif  %}
                 <div style="flex:1">
                     <h5 class="mb-0"> <a href="#" class="text-dark">{{item.product.name}}
-                            shoe</a></h5>
+                            </h5>
                 </div>
                 <div style="flex:1">
                     <p><strong>${{item.product.price}}</strong>
@@ -104,14 +104,14 @@
     //Hide the user info form if user is logged in already
 
   
-    if(user != 'AnoymousUser'){
+    if(user != 'AnonymousUser'){
         document.getElementById('user-info').innerHTML = ''
     }
 
     // Hide entire form if user is logged in and shipping is false
     // Show the payment
 
-    if(shipping == 'False' && user != 'AnoymousUser'){
+    if(shipping == 'False' && user != 'AnonymousUser'){
         document.getElementById('form-wrapper').classList.add("hidden")
         document.getElementById('payment-info').classList.remove("hidden")
     }

@@ -3,6 +3,7 @@ from django.http import JsonResponse
 import json
 import datetime
 from .models import Order,OrderItem,Product,Shipping
+from ecommerce.utils import cookieCart
 # Create your views here.
 def cart(request):
     if request.user.is_authenticated:
@@ -11,13 +12,15 @@ def cart(request):
         items = order.orderitem_set.all()
 
     else:
-        items = []
-        order = {'get_cart_total':0, 'get_cart_items':0}
+        cookieData = cookieCart(request)
+        order = cookieData['order']
+        items = cookieData['items']
+            
         
 
     context={
         "items":items,
-        'order': order
+        'order': order,
     }
     return render(request, 'carts/cart.html',context)
 
@@ -27,11 +30,15 @@ def checkout(request):
         order, created = Order.objects.get_or_create(customer=customer, order_completed=False)
         items = order.orderitem_set.all()
     else:
-        items = []
+        cookieData = cookieCart(request)
+        order = cookieData['order']
+        items = cookieData['items']
+        
+
         
     context={
         "items":items,
-        'order': order
+        'order': order,
     }
     return render(request, 'carts/checkout.html',context)    
 
