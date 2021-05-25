@@ -1,21 +1,25 @@
 let updateBtn = document.getElementsByClassName('update-cart')
+let navbar = document.getElementsByClassName('product-nav')
+let cartCard = document.getElementsByClassName('cart-card')
+let cartTotal = document.getElementById('cart-total')
 
-    for (var i = 0 ; i < updateBtn.length; i++) {
-        updateBtn[i].addEventListener('click', function(){
-            var productId = this.dataset.product
-            var action = this.dataset.action
-         
-    
-            if(user == 'AnonymousUser'){
-                addCookieItem(productId, action)
-            }
-    
-            else{
-                updateUserOrder(productId, action)
-            }
-        })
-     }
 
+
+        for (var i = 0 ; i < updateBtn.length; i++) {
+            updateBtn[i].addEventListener('click', function(){
+                var productId = this.dataset.product
+                var action = this.dataset.action
+            
+                console.log('Click')
+                if(user == 'AnonymousUser'){
+                    addCookieItem(productId, action)
+                }
+        
+                else{
+                    updateUserOrder(productId, action)
+                }
+            })
+        }
   
 function addCookieItem(productId, action){
    if(action == "add"){
@@ -37,7 +41,11 @@ function addCookieItem(productId, action){
    location.reload()
 }
 
+
+
+
 function updateUserOrder(productId,action){
+
     var url = '/update_item/'
 
     fetch(url, {
@@ -55,6 +63,7 @@ function updateUserOrder(productId,action){
         return response.json()
     })
     .then((data) => {
-        location.reload()
+        console.log(data)
+        cartTotal.textContent = data.cart_items
     })
 }

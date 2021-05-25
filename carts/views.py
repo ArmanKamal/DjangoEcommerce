@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import JsonResponse
 import json
 import datetime
@@ -45,11 +45,10 @@ def checkout(request):
 
 def updateItem(request):
     data = json.loads(request.body)
-    print(data)
     productId = data['productId']
     action = data['action']
 
-
+  
     customer = request.user.customer
     product = Product.objects.get(id=productId)
     order, created = Order.objects.get_or_create(customer=customer, order_completed=False)
@@ -60,14 +59,17 @@ def updateItem(request):
         orderItem.quantity = orderItem.quantity+1
     else:
         orderItem.quantity = orderItem.quantity - 1
-    
+ 
     orderItem.save()
-    request.session['cart_items'] = order.get_items
+
+    request.session['cart_item'] = order.get_items
 
     if orderItem.quantity <=0:
         orderItem.delete()
-    
-    return JsonResponse('Item was addedd',safe=False)
+
+
+    return JsonResponse({'cart_items': order.get_items})
+   
 
 
 

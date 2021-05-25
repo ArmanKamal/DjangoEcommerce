@@ -276,11 +276,15 @@ div {
 }
 
 .bbb_deals_image {
-    width: 100%
+    width: 100%;
 }
 
 .bbb_deals_image img {
-    width: 100%
+    width: 100%;
+}
+
+.divider{
+    border-top: 1px solid #e3e3e3;
 }
 
 .bbb_deals_content {
