@@ -360,3 +360,44 @@ div {
         font-size: 20px
     }
 }
+
+
+
+#flash-container{
+    position: fixed;
+    top:2%;
+    right:2%;
+    width: 300px;
+    background-color: #3498db;
+   
+}
+
+.flash{
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    width: 300px;
+    color: white;
+    animation: fade-in 3s ease;
+}
+
+.fade-out{
+    animation: fade-out 1s ease 2s forwards;
+}
+
+@keyframes fade-in{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+@keyframes fade-out{
+    0%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}

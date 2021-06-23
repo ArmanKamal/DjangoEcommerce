@@ -50,7 +50,7 @@
                                 <div class="bbb_deals_item_price ml-auto">${{product.price}}</div>
                             </div>
                             <div class="row  mt-4">
-                                <button class="btn btn-info mx-3 ">View</button>
+                                <button class="btn btn-info mx-3 "><a href="{% url 'detail' product.id %}">View<a/></button>
                                 <button data-product={{product.id}} data-action="add" class="btn btn-success update-cart">Add to Cart</button>
                             </div>
                             {{ request.session.cart_items}}

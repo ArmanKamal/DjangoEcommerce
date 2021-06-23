@@ -1,3 +1,4 @@
+from django.core.checks.messages import Error
 from django.shortcuts import render
 from ecommerce.utils import cookieCart
 from .models import Product
@@ -10,3 +11,9 @@ def list(request):
 
 
 
+def detail(request,pk):
+    product = Product.objects.get(id=pk)
+    context = {
+            "product": product
+        }
+    return render(request, "products/detail.html",context)

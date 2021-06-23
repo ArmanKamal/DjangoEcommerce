@@ -2,15 +2,16 @@ let updateBtn = document.getElementsByClassName('update-cart')
 let navbar = document.getElementsByClassName('product-nav')
 let cartCard = document.getElementsByClassName('cart-card')
 let cartTotal = document.getElementById('cart-total')
-
+const flashContainer = document.getElementById('flash-container')
 
 
         for (var i = 0 ; i < updateBtn.length; i++) {
             updateBtn[i].addEventListener('click', function(){
+                
                 var productId = this.dataset.product
                 var action = this.dataset.action
             
-                console.log('Click')
+               
                 if(user == 'AnonymousUser'){
                     addCookieItem(productId, action)
                 }
@@ -66,4 +67,19 @@ function updateUserOrder(productId,action){
         console.log(data)
         cartTotal.textContent = data.cart_items
     })
+}
+
+
+function flashMessage(){
+    const para = document.createElement('P')
+    para.classList.add('flash')
+    para.innerHtml = "Added to Cart &times;"
+    console.log("Hello")
+    flashContainer.appendChild(para)
+    para.classList.add('fade-out')
+
+    setTimeout(() => {
+        flashContainer.removeChild(para)
+
+    },3000);
 }
