@@ -1,0 +1,41 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    Admin Dashboard
+
+    <div class="cotanier">
+        <div class="col-md-10 mx-auto">
+            <table class="table table-dark table-striped">
+                <thead>
+                    <tr class="font-weight-bold">
+                        <th >Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Image</th>
+                        <th>Stock</th>
+                        <th >Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for product in products%}
+                <tr>
+                    <td>{{product.name}}</td>
+                    <td>{{product.description}}</td>
+                    <td>${{product.price|floatformat:2}}</td>
+                    {% if product.image %}
+                    <td><img src="{{product.image.url}}" height="60px" /></td>
+                    {% else%}
+                    <td>No Image Uploaded</td>
+                    {% endif %}
+                    <td>{{product.stock}}2</td>
+                    <td style="display:flex">
+                        <a href="#" class="btn btn-info btn-sm">Edit</a>
+                        <a href="#" class="btn btn-danger btn-sm ml-2">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

@@ -4,6 +4,13 @@
 <div class="container">
     <div class="row box-element rounded my-4">
         <div class="col-lg-6">
+        {% if messages %}
+        {% for message in messages%}
+            <div class="alert  alert-danger">
+                <p>{{message}}</p>
+            </div>
+        {% endfor %}
+        {% endif %}
             <div class="" id="form-wrapper">
                 <form action="" id="form">
                     <h3 class="ml-2">User Information:</h3>
@@ -170,7 +177,7 @@
        })
           .then((response) => response.json())
            .then((data) => {
-               console.log(data)
+
                alert('Transaction completed');
                window.location.href = "{% url 'list' %}"
            })

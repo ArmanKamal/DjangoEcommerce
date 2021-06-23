@@ -14,7 +14,7 @@
  
   <script type="text/javascript">
     var user = "{{request.user}}";
-
+    var cart_total = "{{request.session.cart}}"
     function getCookie(name) {
       let cookieValue = null;
       if (document.cookie && document.cookie !== "") {
@@ -46,6 +46,7 @@
 <body>
 
   {% include 'includes/navbar.html' %} {% block content %}
+  
        <section id="flash-container">
 
     </section>

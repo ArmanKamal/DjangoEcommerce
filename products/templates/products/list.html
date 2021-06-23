@@ -1,7 +1,7 @@
 {% extends 'main.html' %} 
 {% load static %} 
 {% block content %}
-
+{% comment %} 
 <div class="row my-4">
     <div class="col-md-12">
        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
@@ -25,7 +25,7 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
-</div>
+</div> {% endcomment %}
  
 </div>
 
@@ -34,6 +34,7 @@
 
 <div class="container">
     <div class="row mt-5">
+     
     {% for product in products %}
          <div class="col-md-4 my-4  ">
             <!-- bbb_deals -->
@@ -53,7 +54,7 @@
                                 <button class="btn btn-info mx-3 "><a href="{% url 'detail' product.id %}">View<a/></button>
                                 <button data-product={{product.id}} data-action="add" class="btn btn-success update-cart">Add to Cart</button>
                             </div>
-                            {{ request.session.cart_items}}
+                     
                            
                         </div>
                     </div>

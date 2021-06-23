@@ -1,11 +1,12 @@
 from django.contrib import admin
-from admin.views import index
+from dashboard.views import index
 from django.urls import path,include
 from django.conf.urls.static import static
 from django.conf import settings
 from carts.views import updateItem,processOrder
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('dashboard/',index),
     path('',include('products.urls')),
     path('cart/',include('carts.urls')),
     path('update_item/',updateItem),
