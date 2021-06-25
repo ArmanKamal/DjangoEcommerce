@@ -13,18 +13,21 @@ def index(request):
 def create(request):
     if request.method == "POST":
         errors = Product.objects.validate_product(request.POST)
-        if len(errors) >= 0:
-            messages.error(request,errors)
+        if errors:
+            for key,value in errors.items():
+                messages.error(request,value)
             return redirect('/dashboard/products/create')
-        Product.objects.create(
+  
+        product = Product.objects.create(
             name = request.POST['name'],
             description = request.POST['description'],
             price = request.POST['price'],
-            digital = request.POST['digital'],
             image = request.POST['image'],
-            stock = request.POST['stock']
+            stock = request.POST['stock'],
         
         )
+    
+    
         return redirect('/dashboard')
-
-    return render(request,'product-create.html')
+    else:
+        return render(request,'product-create.html')

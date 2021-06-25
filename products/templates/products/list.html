@@ -41,7 +41,9 @@
             <div class="bbb_deals">
                 <div class="bbb_deals_slider_container">
                     <div class=" bbb_deals_item">
-                        <div class="bbb_deals_image"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1562074043/234.png" class="product-img" alt=""></div>
+                    {% if product.image  %}
+                        <div class="bbb_deals_image"><img src={{product.image.url}} class="product-img" alt=""></div>
+                    {% endif %}
                         <div class="bbb_deals_content">
                             <div class="bbb_deals_info_line d-flex flex-row justify-content-start">
                                 <div class="bbb_deals_item_category"><a href="#">Product category</a></div>

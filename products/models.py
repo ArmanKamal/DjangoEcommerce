@@ -21,8 +21,8 @@ class ProductManager(models.Manager):
             errors['p_name'] = "Product name cannot be empty"
         if len(postData['price']) <= 0:
             errors['p_p_empty'] = "Price cannot be empty"
-        if postData['price'] != POSITIVE_REGEX:
-                errors['p_price'] = "Price cannot be negative or character"
+        if postData['price']<='0':
+                errors['p_price'] = "Price cannot be negative"
         if len(postData['description']) <=0 :
             errors['description'] = "Description cannot be empty"
         return errors
@@ -32,7 +32,7 @@ class ProductManager(models.Manager):
 class Product(models.Model):
     name = models.CharField(max_length=120)
     price = models.DecimalField(max_digits=7, decimal_places=2)
-    image = models.ImageField(null=True,blank=True)
+    image = models.ImageField(null=True,blank=True,upload_to ='uploads/')
     stock = models.IntegerField(null=True,blank=True)
     description = models.TextField(default="No description found")
     digital = models.BooleanField(default=False,null=True,blank=True)
