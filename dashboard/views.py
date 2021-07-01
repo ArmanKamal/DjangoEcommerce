@@ -17,6 +17,7 @@ def create(request):
             for key,value in errors.items():
                 messages.error(request,value)
             return redirect('/dashboard/products/create')
+        digital = request.POST.get("digital", False)
   
         product = Product.objects.create(
             name = request.POST['name'],
@@ -24,10 +25,17 @@ def create(request):
             price = request.POST['price'],
             image = request.POST['image'],
             stock = request.POST['stock'],
-        
+            digital = digital
         )
-    
+        
     
         return redirect('/dashboard')
     else:
         return render(request,'product-create.html')
+
+
+
+def delete(request,id):
+    product = Product.objects.get(id=id)
+    product.delete()
+    return redirect('/dashboard')

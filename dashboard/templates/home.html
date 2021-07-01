@@ -1,11 +1,11 @@
 {% extends 'base-admin.html' %}
 
 {% block content %}
-    Admin Dashboard
+ 
 
     <div class="cotanier">
-        <div class="col-md-10 mx-auto">
-            <table class="table table-dark table-striped">
+        <div class="col-md-10 mx-auto my-5">
+            <table class="table table-info table-striped table-bordered">
                 <thead>
                     <tr class="font-weight-bold">
                         <th >Name</th>
@@ -27,10 +27,10 @@
                     {% else%}
                     <td>No Image Uploaded</td>
                     {% endif %}
-                    <td>{{product.stock}}2</td>
+                    <td>{{product.stock}}</td>
                     <td style="display:flex">
                         <a href="#" class="btn btn-info btn-sm">Edit</a>
-                        <a href="#" class="btn btn-danger btn-sm ml-2">Delete</a>
+                        <a href="{% url 'product-delete' product.id %}" class="btn btn-danger btn-sm ml-2">Delete</a>
                     </td>
                 </tr>
                 {% endfor %}
