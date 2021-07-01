@@ -1,3 +1,4 @@
+from products.models import Customer
 from django.shortcuts import render,redirect
 from django.http import JsonResponse
 import json
@@ -70,19 +71,41 @@ def processOrder(request):
 
     transaction_id = datetime.datetime.now().timestamp()
     data = json.loads(request.body)
+ 
 
     if request.user.is_authenticated:
         customer = request.user.customer
-        order,created = Order.objects.get_or_create(customer=customer, order_completed=False)
-        total = float(data['userForm']['total'])
-        order.transaction_id = transaction_id
+        order,created = Order.objects.get_or_create(customer=customer, order_completed=False)     
+
+    else:
+        name = data['userForm']['name']
+        email = data['userForm']['email']
+        print(name,email)
+        cookieData = cookieCart(request)
+        items = cookieData['items']
+
+        customer, created = Customer.objects.get_or_create(email=email)
+        customer.name = name
+        customer.save()
+
+        order = Order.objects.create(
+            customer = customer,
+            order_completed = False
+        )
+
+        for item in items:
+            product = Product.objects.get(id=item['product']['id'])
+            orderitem = OrderItem.objects.create(product=product,order=order,quantity=item['quantity'])
+
+    total = float(data['userForm']['total'])
+    order.transaction_id = transaction_id
     
-        if total == float(order.get_cart_total):
+    if total == float(order.get_cart_total):
                 order.order_completed = True
                 request.session['cart'] = 0 
-        order.save()
+    order.save()
 
-        if order.shipping == True:
+    if order.shipping == True:
             Shipping.objects.create(
                 customer = customer,
                 order = order,
@@ -91,9 +114,5 @@ def processOrder(request):
                 state = data['shipping']['state'],
                 zipcode = data['shipping']['zipcode']
             )
-            
-
-    else:
-        print('User is not logged in') 
     return JsonResponse('Payment complete!',safe=False)
 

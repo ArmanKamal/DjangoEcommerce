@@ -17,7 +17,7 @@
                     
                     <div id="user-info">
                         <div class="form-field">
-                            <input required class="form-control" type="text" name="name" placeholder="Name..">
+                            <input required class="form-control" type="text" name="customer_name" placeholder="Name..">
                         </div>
                         <div class="form-field">
                             <input required class="form-control" type="email" name="email" placeholder="Email..">
@@ -67,27 +67,6 @@
                 </div>
             </div>
             {% endfor %}
-            <div class="p-4">
-                <p class="font-italic mb-4">Shipping and additional costs are calculated based on values you have
-                    entered.
-                </p>
-                <ul class="list-unstyled mb-4">
-                    <li class="d-flex justify-content-between py-3 border-bottom"><strong
-                            class="text-muted">Total Items:</strong><strong>{{order.get_items}}</strong></li>
-                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Order
-                            Subtotal
-                        </strong><strong>${{order.get_cart_total|floatformat:2}}</strong></li>
-         
-                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Shipping
-                            and
-                            handling</strong><strong>$10.00</strong></li>
-
-                    <li class="d-flex justify-content-between py-3 border-bottom"><strong
-                            class="text-muted">Total</strong>
-                        <h5 class="font-weight-bold">$400.00</h5>
-                    </li>
-                </ul><a href="#" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</a>
-            </div>
         </div>
 
     </div>
@@ -158,9 +137,9 @@
            shippingInfo.state = form.state.value
            shippingInfo.zipcode = form.zipcode.value
        }
-
-       if(user == 'AnoymousUser'){
-           userFormData.name = form.name.value
+        
+       if(user == 'AnonymousUser'){
+           userFormData.name = form.customer_name.value
            userFormData.email = form.email.value
        }
 
@@ -177,7 +156,8 @@
        })
           .then((response) => response.json())
            .then((data) => {
-
+               cart = {}
+               document.cookie = 'cart='+ JSON.stringify(cart) + ";domain=;path=/"
                alert('Transaction completed');
                window.location.href = "{% url 'list' %}"
            })

@@ -11,6 +11,7 @@ def cookieCart(request):
     items = []
     order = {'get_cart_total':0, 'get_items':0,'shipping':False}
     request.session['cart_items'] = order['get_items']
+    
     for i in cart:
         try:
             request.session['cart_items'] += cart[i]['quantity']
@@ -35,5 +36,6 @@ def cookieCart(request):
                 order['shipping'] = True
         except:
             pass
+    request.session['cart'] = order['get_items']
     return {'order':order, 'items':items}
     
