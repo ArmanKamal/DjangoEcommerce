@@ -1,6 +1,7 @@
 from django.contrib.messages.api import error
 from django.shortcuts import redirect, render
 from products.models import Product
+from carts.models import Order
 from django.contrib import messages
 
 # Create your views here.
@@ -33,6 +34,13 @@ def create(request):
     else:
         return render(request,'product-create.html')
 
+def order_view(request):
+    orders = Order.objects.all()
+    context = {
+        "orders": orders,
+        
+    }
+    return render(request,'product-order.html',context)
 
 
 def delete(request,id):
