@@ -23,3 +23,6 @@ def detail(request,pk):
             "product": product
         }
     return render(request, "products/detail.html",context)
+
+def add_comment(request):
+    pass

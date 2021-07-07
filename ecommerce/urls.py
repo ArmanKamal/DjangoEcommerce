@@ -3,6 +3,7 @@ from django.urls import path,include
 from django.conf.urls.static import static
 from django.conf import settings
 from carts.views import updateItem,processOrder
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('dashboard/',include('dashboard.urls')),
