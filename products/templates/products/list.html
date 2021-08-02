@@ -1,7 +1,7 @@
 {% extends 'main.html' %} 
 {% load static %} 
 {% block content %}
-{% comment %} 
+
 <div class="row my-4">
     <div class="col-md-12">
        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
@@ -25,16 +25,17 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
-</div> {% endcomment %}
+</div>
  
 </div>
 
 <div class="divider my-4"></div>
 <h2 class="text-center">Latest Products</h2>
 
+
+
 <div class="container">
-    <div class="row mt-5">
-     
+    <div class="row mt-5"> 
     {% for product in products %}
          <div class="col-md-4 my-4  ">
             <!-- bbb_deals -->
