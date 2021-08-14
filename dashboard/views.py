@@ -12,15 +12,15 @@ def index(request):
     return render(request, "home.html",context)
 
 def create(request):
-    if request.method == "POST" and request.FILES['image']:
+    if request.method == "POST":
         errors = Product.objects.validate_product(request.POST)
-        image = request.FILES['image']
+        
         if errors:
             for key,value in errors.items():
                 messages.error(request,value)
             return redirect('/dashboard/products/create')
         digital = request.POST.get("digital", False)
-  
+        image = request.FILES['image']
         product = Product.objects.create(
             name = request.POST['name'],
             description = request.POST['description'],
@@ -34,6 +34,37 @@ def create(request):
         return redirect('/dashboard')
     else:
         return render(request,'product-create.html')
+
+def edit(request,id):
+    product = Product.objects.get(id=id)
+    context = {"product":product}
+    return render(request,"product-edit.html",context)
+
+def update_product(request,id):
+    product = Product.objects.get(id=id)
+    context = {"product":product}
+    if request.method == "POST":
+        product = Product.objects.get(id=id)
+        errors = Product.objects.validate_edit_product(request.POST)
+        if errors:
+            for key,value in errors.items():
+                messages.error(request,value)
+            return redirect(f'/dashboard/products/edit/{product.id}')
+        digital = request.POST.get("digital", False)
+        product.name = request.POST['name']
+        product.description = request.POST['description']
+        product.price = request.POST['price']
+        if 'image' in request.FILES:
+            product.image = request.FILES['image']
+        product.stock = request.POST['stock']
+        product.digital = digital
+        product.save()
+
+        return redirect('/dashboard')
+    return render(request,"product-edit.html",context)
+        
+        
+
 
 def order_view(request):
     orders = Order.objects.all()

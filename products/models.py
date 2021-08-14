@@ -25,6 +25,20 @@ class ProductManager(models.Manager):
                 errors['p_price'] = "Price cannot be negative"
         if len(postData['description']) <=0 :
             errors['description'] = "Description cannot be empty"
+        if postData['image'] == '':
+            errors['image'] = "Image cannot be empty"
+        return errors
+
+    def validate_edit_product(self,postData):
+        errors = {}
+        if len(postData['name'])<=0:
+            errors['p_name'] = "Product name cannot be empty"
+        if len(postData['price']) <= 0:
+            errors['p_p_empty'] = "Price cannot be empty"
+        if postData['price']<='0':
+                errors['p_price'] = "Price cannot be negative"
+        if len(postData['description']) <=0 :
+            errors['description'] = "Description cannot be empty"
         return errors
     
    
