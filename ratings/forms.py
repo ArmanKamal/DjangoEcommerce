@@ -6,4 +6,4 @@ class CommentForm(forms.ModelForm):
     
     class Meta:
         model = Comment
-        fields = ['subject','comment','rating']
+        fields = ['subject','comment']

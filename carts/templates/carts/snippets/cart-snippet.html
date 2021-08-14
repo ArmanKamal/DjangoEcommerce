@@ -4,23 +4,7 @@
             <a href="{% url 'list' %}" class="btn btn-outline-dark">&#x2190; Continue Shopping</a>
         </div>
 
-        <div class="box-element my-2">
-            <table class="table">
-                <tr>
-                    <th>
-                        <h5>Items: <strong>{{order.get_items}}</strong></h5>
-                    </th>
-                    <th>
-                        <h5>Total: <strong>${{order.get_cart_total|floatformat:2}}</strong></h5>
-                    </th>
-                    <th>
-                        <a class="float-right btn btn-success" href="{% url 'checkout' %}">Checkout</a>
-                    </th>
-
-                </tr>
-            </table>
-        </div>
-        <div class="box-element">
+        <div class="box-element mt-2">
             <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -75,5 +59,23 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+
+        
+        <div class="box-element ">
+            <table class="table">
+                <tr>
+                    <th>
+                        <h5>Items: <strong>{{order.get_items}}</strong></h5>
+                    </th>
+                    <th>
+                        <h5>Total: <strong>${{order.get_cart_total|floatformat:2}}</strong></h5>
+                    </th>
+                    <th>
+                        <a class="float-right btn btn-success" href="{% url 'checkout' %}">Checkout</a>
+                    </th>
+
+                </tr>
+            </table>
         </div>
     </div>

@@ -7,6 +7,5 @@ class Comment(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     comment = models.TextField(blank=True,null=True)
     subject = models.CharField(max_length=50,blank=True,null=True)
-    rating = models.IntegerField(default=1)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
