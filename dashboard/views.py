@@ -12,8 +12,9 @@ def index(request):
     return render(request, "home.html",context)
 
 def create(request):
-    if request.method == "POST":
+    if request.method == "POST" and request.FILES['image']:
         errors = Product.objects.validate_product(request.POST)
+        image = request.FILES['image']
         if errors:
             for key,value in errors.items():
                 messages.error(request,value)
@@ -24,7 +25,7 @@ def create(request):
             name = request.POST['name'],
             description = request.POST['description'],
             price = request.POST['price'],
-            image = request.POST['image'],
+            image = image,
             stock = request.POST['stock'],
             digital = digital
         )

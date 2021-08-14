@@ -11,7 +11,7 @@
     </div>
 {% endfor %}
 {% endif %}
-<form method="POST" action="/dashboard/products/create">
+<form method="POST" action="/dashboard/products/create" enctype="multipart/form-data">
 {% csrf_token %}
     <div class="form-group">
         <label for="p-title">Product Name</label>
