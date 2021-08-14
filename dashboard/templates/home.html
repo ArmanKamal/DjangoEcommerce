@@ -20,7 +20,7 @@
                 {% for product in products%}
                 <tr>
                     <td>{{product.name}}</td>
-                    <td>{{product.description}}</td>
+                    <td>{{product.description|truncatewords:10}}</td>
                     <td>${{product.price|floatformat:2}}</td>
                     {% if product.image %}
                     <td><img src="{{product.image.url}}" height="60px" /></td>
