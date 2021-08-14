@@ -58,6 +58,8 @@ def updateItem(request):
         orderItem.quantity = orderItem.quantity+1
     elif action == 'remove':
         orderItem.quantity = orderItem.quantity - 1
+    elif action == 'delete':
+        orderItem.quantity = 0
     orderItem.save()
     if orderItem.quantity <=0:
         orderItem.delete()
@@ -80,13 +82,13 @@ def processOrder(request):
     else:
         name = data['userForm']['name']
         email = data['userForm']['email']
-        print(name,email)
         cookieData = cookieCart(request)
         items = cookieData['items']
 
         customer, created = Customer.objects.get_or_create(email=email)
-        customer.name = name
-        customer.save()
+        if created:
+            customer.name = name
+            customer.save()
 
         order = Order.objects.create(
             customer = customer,

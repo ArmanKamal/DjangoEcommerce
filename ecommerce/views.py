@@ -13,7 +13,10 @@ def register(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             name = form.cleaned_data.get('first_name')
-            Customer.objects.get_or_create(user=user,email=email,name=name)
+            customer,created = Customer.objects.get_or_create(email=email)
+            customer.user = user
+            customer.name=name
+            customer.save()
             login(request, user)
             return redirect('/')
     else:

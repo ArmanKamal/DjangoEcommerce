@@ -6,6 +6,7 @@ from .models import Product
 from ratings.models import Comment
 from carts.models import Order
 from django.core.paginator import Paginator
+
 # Create your views here.
 def list(request):
     if request.user.is_authenticated:
