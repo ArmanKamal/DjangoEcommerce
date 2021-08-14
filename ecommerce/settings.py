@@ -25,7 +25,7 @@ SECRET_KEY = '@)zq8&)ctz!#32szkg*7_ot$&nv6v=2(k3oh!p*-+*6lrhzy8l'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://djangoshopify.herokuapp.com/','127.0.0.1']
+ALLOWED_HOSTS = ['*','https://djangoshopify.herokuapp.com/','127.0.0.1']
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
