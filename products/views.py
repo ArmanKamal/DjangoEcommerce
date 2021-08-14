@@ -11,9 +11,11 @@ def list(request):
     if request.user.is_authenticated:
         customer = request.user.customer
         order,created = Order.objects.get_or_create(customer = customer, order_completed=False)
+        request.session['cart'] = order.get_items
     else:
-        order = {'shipping',False}
+        order = {'shipping',False,}
         cookieData = cookieCart(request)
+
     products = Product.objects.all()
     paginator = Paginator(products, 10)
     page_number = request.GET.get('page')

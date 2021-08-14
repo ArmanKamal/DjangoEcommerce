@@ -16,28 +16,30 @@
 			<th class="order-total">Quantity</th>
 		</tr>
 	</thead>
+        <tbody>
+            {% for orderitem in order_items %}
 
-	<tbody>
-    {% for orderitem in order_items %}
+            <tr class="order">
 
-       <tr class="order">
+                    <td>
+                        {{ orderitem.product.name }}
+                    </td>
 
-            <td>
-			    {{ orderitem.product.name }}
-			</td>
-
-			<td class="order-date" data-title="Date">
-				{{orderitem.product.description|truncatewords:10  }}
-			</td>
+                    <td class="order-date" data-title="Date">
+                        {{orderitem.product.description|truncatewords:10  }}
+                    </td>
 
 
-	        <td class="order-date" data-title="Date">
-				{{orderitem.quantity  }}
-			</td>
-			
-		</tr>
+                    <td class="order-date" data-title="Date">
+                        {{orderitem.quantity  }}
+                    </td>
+                    
+                </tr>
 
-    {% endfor %}
+            {% endfor %}
+        </tbody>
+    </table>
+    <a class="btn btn-danger" href="/dashboard/orders">Go Back</a>
 </div>
 
 
