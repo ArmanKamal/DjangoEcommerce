@@ -5,6 +5,7 @@ from ecommerce.utils import cookieCart
 from .models import Product
 from ratings.models import Comment
 from carts.models import Order
+from django.core.paginator import Paginator
 # Create your views here.
 def list(request):
     if request.user.is_authenticated:
@@ -14,7 +15,10 @@ def list(request):
         order = {'shipping',False}
         cookieData = cookieCart(request)
     products = Product.objects.all()
-    context={"products":products}
+    paginator = Paginator(products, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context={"products":products,"page_obj":page_obj}
     return render(request, 'products/list.html',context)
 
 

@@ -1,0 +1,44 @@
+{% extends 'base-admin.html' %}
+
+{% block content %}
+
+<div class="container">
+    <h3 class="my-2">Order Detail view</h3>
+    <p class="my-4"><b>Transaction Id:</b> {{order.transaction_id}}</p>
+    <p class="my-4"><b>Customer Name:</b> {{order.customer.name}}</p>
+    <p class="my-4"><b>Order Date:</b> {{order.date_ordered}}</p>
+    <p class="my-4"><b>Order Status:</b> {% if order.order_completed %}Completed {%else %} Pending {% endif %}</p>
+    <table class="table table-striped table-bordered my-4">
+	<thead>
+		<tr>
+			<th class="order-date">Product Name</th>
+			<th class="order-status">Description</th>
+			<th class="order-total">Quantity</th>
+		</tr>
+	</thead>
+
+	<tbody>
+    {% for orderitem in order_items %}
+
+       <tr class="order">
+
+            <td>
+			    {{ orderitem.product.name }}
+			</td>
+
+			<td class="order-date" data-title="Date">
+				{{orderitem.product.description|truncatewords:10  }}
+			</td>
+
+
+	        <td class="order-date" data-title="Date">
+				{{orderitem.quantity  }}
+			</td>
+			
+		</tr>
+
+    {% endfor %}
+</div>
+
+
+{% endblock %}

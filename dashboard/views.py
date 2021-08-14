@@ -1,6 +1,6 @@
 from django.contrib.messages.api import error
 from django.shortcuts import redirect, render
-from products.models import Product
+from products.models import Customer, Product
 from carts.models import Order
 from django.contrib import messages
 
@@ -14,12 +14,15 @@ def index(request):
 def create(request):
     if request.method == "POST":
         errors = Product.objects.validate_product(request.POST)
+        if 'image' not in request.FILES:
+            errors['image'] = "Please select an image"
         
         if errors:
             for key,value in errors.items():
                 messages.error(request,value)
             return redirect('/dashboard/products/create')
         digital = request.POST.get("digital", False)
+      
         image = request.FILES['image']
         product = Product.objects.create(
             name = request.POST['name'],
@@ -73,6 +76,17 @@ def order_view(request):
         
     }
     return render(request,'product-order.html',context)
+
+def order_details_view(request,id):
+    order = Order.objects.get(id=id)
+    order_items = order.orderitem_set.all()
+    context = {
+        "order":order,
+        "order_items":order_items
+    }
+    
+    return render(request,'order-view.html',context)
+
 
 
 def delete(request,id):
