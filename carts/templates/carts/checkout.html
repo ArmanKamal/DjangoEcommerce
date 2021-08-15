@@ -67,12 +67,10 @@
         </div>
 
     </div>
-    <div class="row">
-      <div class="box-element hidden" id="payment-info">
-        <small>Paypal Options</small>
-        <button id="make-payment" class="btn btn-info">Make Payment</button>
-    </div>
-    </div>
+
+        <small id="option" class="hidden">Paypal Options</small>
+        <button id="make-payment" class="btn btn-info   payment-info hidden">Make Payment</button>
+
   
 </div>
 </div>
@@ -96,7 +94,8 @@
 
     if(shipping == 'False' && user != 'AnonymousUser'){
         document.getElementById('form-wrapper').classList.add("hidden")
-        document.getElementById('payment-info').classList.remove("hidden")
+        document.querySelector('.payment-info').classList.remove("hidden")
+        document.getElementById('option').classList.remove("hidden")
     }
 
 
@@ -107,7 +106,8 @@
     form.addEventListener('submit', function(e){
         e.preventDefault()
         document.getElementById('form-button').classList.add('hidden')
-        document.getElementById('payment-info').classList.remove('hidden')
+        document.querySelector('.payment-info').classList.remove('hidden')
+        document.getElementById('option').classList.remove('hidden')
     })
 
     
