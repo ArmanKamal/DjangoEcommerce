@@ -55,7 +55,7 @@
                 </div>
                 {% endif  %}
                 <div style="flex:1">
-                    <h5 class="mb-0"> <a href="#" class="text-dark">{{item.product.name}}
+                    <h5 class="mb-0"> <a href="{% url 'detail' item.product.id %}" class="text-dark">{{item.product.name}}</a>
                             </h5>
                 </div>
                 <div style="flex:1">
